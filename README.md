@@ -12,28 +12,28 @@ A standalone Cloudflare Worker that preserves the existing DemoBot interface and
 
 ## Deployment
 
-No deployment is performed by this repository setup. Review and verify first:
+### Deploy your own
+
+This repository is self-contained. Deploy it to your own Cloudflare account with Workers AI enabled:
 
 ```sh
+git clone https://github.com/remocloudflare/demobot-soccer-cycling.git
+cd demobot-soccer-cycling
 npm ci
 npm test
 npm run verify
 npm run dry-run
-```
-
-When an operator explicitly approves deployment, publish the standalone workers.dev preview with:
-
-```sh
+npx wrangler login
 npx wrangler deploy
 ```
 
-Custom-domain cutover is a separate, deliberate operation and is not encoded in `wrangler.jsonc`.
+Wrangler creates the Workers AI binding from `wrangler.jsonc`; no API key or third-party model credential is required. The deployment uses your authenticated Wrangler account and receives its own `workers.dev` URL. Workers AI usage can consume account allocation or incur charges. Custom-domain attachment is optional and deliberately not encoded in this repository.
 
 ## Current live and preview URLs
 
 - Production: `https://demobot.itlinux.cc/`
 - Standalone Worker: `https://demobot-soccer-cycling.rm-815.workers.dev/`
-- Source: `https://github.com/remocloudflare/demobot-soccer-cycling` (private)
+- Source: `https://github.com/remocloudflare/demobot-soccer-cycling` (public)
 
 Production is served by the standalone `demobot-soccer-cycling` Worker. Desktop/mobile rendering, `/healthz`, the local penguin asset, an allowed Linux prompt, and the exact off-topic refusal have been verified.
 
